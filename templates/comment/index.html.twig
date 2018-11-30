@@ -7,30 +7,39 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .blank {margin-bottom: 10%;}
+    #border {border:2px solid; margin-bottom: 5%; padding: 2%}
 </style>
 
 <div class="example-wrapper">
     <h1>Hello! ✅</h1>
 {% for article in Article%}
-	
-   	<div>
-   		<h1>Article</h1>
-    	{{article.titre}}
-    	<p>{{article.texte}}</p>
-   	</div>
-   	
+	<form action="addcom" method="get">
+   		<div>
+   			<h1>Article</h1>
+    		{{article.titre}}
+    		<p>{{article.texte}}</p>
+   		</div>
+   		<div class="blank"></div>
+   		<button name="addcom" type="submit" value="{{article.id}}"> ajouter un commentaire</button>
+   		<div class="blank"></div>
+   	</form>
 
+    		<h1 style="text-align: center; margin-bottom: 5%;">commentaires</h1>
     {% for comment in Comment %}
     	{% if comment.fkarticle == article %}
-    		<h1 style="margin-left: 4%">commentaires</h1>
-    		<p style="margin-left: 4%">{{comment.textec}}</p>
+    <div id="border">
+    		<h4><p>{{comment.textec}}</p></h4>
     		  
-{{ form(form) }}
+
 			{% for j in Comment %}
     			{% if j.fkcomment == comment %}
     				<p id="resp" style="margin-left: 8%">{{j.textec}}</p>
+
 				{% endif %}
     		{% endfor %}
+    		<div class="blank"></div>
+    	</div>
     	{% endif %}	
 	{% endfor %}
 {% endfor %}
